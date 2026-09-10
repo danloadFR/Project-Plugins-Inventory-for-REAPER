@@ -2,7 +2,7 @@
 
 **Find out which plugins your REAPER projects actually use.**
 
-`Project Plugins Inventory` is a Lua ReaScript for [REAPER](https://www.reaper.fm/) that recursively scans your REAPER project folder and creates a list of all plugins referenced by your `.rpp` projects.
+`Project Plugins Inventory` is a Lua ReaScript for [REAPER](https://www.reaper.fm/) that recursively scans your REAPER project folder and creates a numbered list of all plugins referenced by your `.rpp` projects.
 
 It is particularly useful when **moving to a new computer, reinstalling an operating system, or rebuilding a REAPER installation**.
 
@@ -35,12 +35,14 @@ The script:
 - Does **not** open or load the projects in REAPER.
 - Extracts plugin references from the project files.
 - Removes duplicate plugin names.
-- Sorts the list alphabetically.
+- Removes plugin format prefixes such as `VST3:`, `VSTi:` and `CLAP:`.
+- Sorts the plugin names alphabetically.
+- Numbers the plugins from `001` to `999`.
 - Creates a single file named:
 
 `Project Plugins.txt`
 
-The output file is created in the root of the scanned project folder.
+The output file is created in the root folder being scanned.
 
 ## Supported plugin formats
 
@@ -52,6 +54,8 @@ The script currently looks for plugin entries used by REAPER for:
 - JSFX
 - Audio Units (AU)
 - DirectX (DX)
+
+The plugin format itself is not included in the output because, for the intended use of this script, the plugin name is what matters.
 
 ## Missing or offline plugins
 
@@ -115,6 +119,21 @@ The scan can be interrupted at any time using the **STOP** button or the **Esc**
 
 If the scan is interrupted, the existing `Project Plugins.txt` file is **not modified**.
 
+## Output
+
+The resulting `Project Plugins.txt` contains one plugin name per line, preceded by a three-digit number:
+
+```text
+001 - FabFilter Pro-Q 4
+002 - Kontakt 8
+003 - ReaComp
+004 - ValhallaVintageVerb
+```
+
+The list is sorted alphabetically and each plugin appears only once.
+
+The numbering runs from `001` to `999`.
+
 ## Requirements
 
 - REAPER 7.x
@@ -131,19 +150,6 @@ It should therefore work on:
 - Linux
 
 although platform-specific testing is welcome.
-
-## Output
-
-The resulting `Project Plugins.txt` contains one plugin reference per line, for example:
-
-```text
-CLAP: Some Plugin
-VST3: Another Plugin (Manufacturer)
-VSTi: Some Instrument (Developer)
-utility/volume
-```
-
-The list is sorted alphabetically and each entry appears only once.
 
 ## Contributing / Testing
 
