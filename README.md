@@ -37,12 +37,26 @@ The script:
 - Removes duplicate plugin names.
 - Removes plugin format prefixes such as `VST3:`, `VSTi:` and `CLAP:`.
 - Sorts the plugin names alphabetically.
-- Numbers the plugins from `001` to `999`.
+- Numbers the plugins using four digits (`0001`, `0002`, ...).
 - Creates a single file named:
 
 `Project Plugins.txt`
 
 The output file is created in the root folder being scanned.
+
+### How long does it take?
+
+The scan time depends on the number and size of your REAPER projects.
+
+If you have a large project library containing hundreds or thousands of `.rpp` files, the operation can take **quite some time**.
+
+This is normal: the script has to examine every project file in the selected folder and all of its subdirectories.
+
+A progress window is displayed during the scan so you can see that the operation is still running.
+
+**Do not assume that REAPER has frozen if the scan takes a while.**
+
+The scan can be interrupted at any time using the **STOP** button or the **Esc** key.
 
 ## Supported plugin formats
 
@@ -85,8 +99,9 @@ Instead of trying to remember which plugins were used over the years:
 1. Make your REAPER project folder available on the new system.
 2. Run `Project Plugins Inventory`.
 3. The script scans all `.rpp` files.
-4. Open `Project Plugins.txt`.
-5. Install the plugins appearing in the list.
+4. Wait for the scan to complete. Depending on the size of your project library, this may take several minutes or more.
+5. Open `Project Plugins.txt`.
+6. Install the plugins appearing in the list.
 
 You now have a much more focused list of plugins to reinstall.
 
@@ -121,47 +136,10 @@ If the scan is interrupted, the existing `Project Plugins.txt` file is **not mod
 
 ## Output
 
-The resulting `Project Plugins.txt` contains one plugin name per line, preceded by a three-digit number:
+The resulting `Project Plugins.txt` contains one plugin name per line, preceded by a four-digit number:
 
 ```text
-001 - FabFilter Pro-Q 4
-002 - Kontakt 8
-003 - ReaComp
-004 - ValhallaVintageVerb
-```
-
-The list is sorted alphabetically and each plugin appears only once.
-
-The numbering runs from `001` to `999`.
-
-## Requirements
-
-- REAPER 7.x
-- Lua ReaScript support
-
-The script is written in Lua and is intended to be **cross-platform**.
-
-It does not rely on Windows-specific APIs.
-
-It should therefore work on:
-
-- Windows
-- macOS
-- Linux
-
-although platform-specific testing is welcome.
-
-## Contributing / Testing
-
-Feedback, bug reports and testing on different REAPER versions and operating systems are welcome.
-
-In particular, testing on **macOS and Linux** would be useful to confirm full cross-platform compatibility.
-
-## License
-
-MIT License
-
----
-
-**Project Plugins Inventory**  
-A small utility for a very practical problem: **know what you actually need before rebuilding your REAPER system.**
+0001 - FabFilter Pro-Q 4
+0002 - Kontakt 8
+0003 - ReaComp
+0004 - ValhallaVintageVerb
